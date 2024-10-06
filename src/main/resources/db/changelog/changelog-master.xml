@@ -6,4 +6,5 @@
        https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd">
 
     <include relativeToChangelogFile="true" file="changelogs/TICKET_1.xml"/>
+    <include relativeToChangelogFile="true" file="changelogs/TICKET_2.xml"/>
 </databaseChangeLog>
