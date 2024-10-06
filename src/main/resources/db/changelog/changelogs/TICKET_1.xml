@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+       https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd">
+
+    <changeSet id="TICKET_1-1" author="Adrian Jasieniecki">
+        <preConditions>
+            <not>
+                <sequenceExists sequenceName="doctor_seq"/>
+            </not>
+        </preConditions>
+        <createSequence sequenceName="doctor_seq" incrementBy="1" startValue="1"/>
+    </changeSet>
+    <changeSet id="TICKET_1-2" author="Adrian Jasieniecki">
+        <preConditions onFail="WARN">
+            <not>
+                <tableExists tableName="DOCTOR"/>
+            </not>
+        </preConditions>
+        <createTable tableName="DOCTOR">
+            <column name="doctor_id" type="int">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(25)"/>
+            <column name="surname" type="varchar(30)"/>
+            <column name="medical_specialization" type="varchar(50)"/>
+            <column name="email" type="varchar(100)"/>
+            <column name="phone_number" type="varchar(15)"/>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>
