@@ -8,4 +8,5 @@
     <include relativeToChangelogFile="true" file="changelogs/TICKET_1.xml"/>
     <include relativeToChangelogFile="true" file="changelogs/TICKET_2.xml"/>
     <include relativeToChangelogFile="true" file="changelogs/TICKET_3.xml"/>
+    <include relativeToChangelogFile="true" file="changelogs/TICKET_4.xml"/>
 </databaseChangeLog>

@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Set;
 
 @Entity
 @Table(name = "VISITS")
@@ -12,7 +13,7 @@ public class VisitModel {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "visits_generator")
     @SequenceGenerator(name = "visits_generator", sequenceName = "visits_seq", allocationSize = 1)
-    @Column(name = "visit_id")
+    @Column(name = "visits_id")
     private Long id;
 
     @Column(name = "visit_date")
@@ -35,6 +36,9 @@ public class VisitModel {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "doctor_id", nullable = false)
     private DoctorModel doctor;
+
+    @OneToMany(mappedBy = "visit")
+    private Set<PrescriptionModel> prescriptions;
 
     public Long getId() {
         return id;
@@ -96,6 +100,15 @@ public class VisitModel {
 
     public VisitModel setDoctor(DoctorModel doctor) {
         this.doctor = doctor;
+        return this;
+    }
+
+    public Set<PrescriptionModel> getPrescriptions() {
+        return prescriptions;
+    }
+
+    public VisitModel setPrescriptions(Set<PrescriptionModel> prescriptions) {
+        this.prescriptions = prescriptions;
         return this;
     }
 }
