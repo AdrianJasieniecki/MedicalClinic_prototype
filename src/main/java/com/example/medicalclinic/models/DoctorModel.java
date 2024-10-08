@@ -2,6 +2,8 @@ package com.example.medicalclinic.models;
 
 import jakarta.persistence.*;
 
+import java.util.Set;
+
 @Entity
 @Table(name = "DOCTOR")
 public class DoctorModel {
@@ -26,6 +28,9 @@ public class DoctorModel {
 
     @Column(name = "phone_number")
     private String phoneNumber;
+
+    @OneToMany(mappedBy = "doctor")
+    private Set<VisitModel> visits;
 
     public Long getId() {
         return id;
@@ -81,6 +86,15 @@ public class DoctorModel {
         return this;
     }
 
+    public Set<VisitModel> getVisits() {
+        return visits;
+    }
+
+    public DoctorModel setVisits(Set<VisitModel> visits) {
+        this.visits = visits;
+        return this;
+    }
+
     @Override
     public String toString() {
         return "DoctorModel{" +
@@ -90,6 +104,7 @@ public class DoctorModel {
                 ", medicalSpecialization='" + medicalSpecialization + '\'' +
                 ", email='" + email + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
+                ", visits=" + visits +
                 '}';
     }
 }

@@ -3,6 +3,7 @@ package com.example.medicalclinic.models;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.Set;
 
 @Entity
 @Table(name = "PATIENT")
@@ -28,6 +29,9 @@ public class PatientModel {
 
     @Column(name = "phone_number")
     private String phoneNumber;
+
+    @OneToMany(mappedBy = "patient")
+    private Set<VisitModel> visitModel;
 
     @Embedded
     private AddressModel address;
@@ -92,6 +96,15 @@ public class PatientModel {
 
     public PatientModel setAddress(AddressModel address) {
         this.address = address;
+        return this;
+    }
+
+    public Set<VisitModel> getVisitModel() {
+        return visitModel;
+    }
+
+    public PatientModel setVisitModel(Set<VisitModel> visitModel) {
+        this.visitModel = visitModel;
         return this;
     }
 }
