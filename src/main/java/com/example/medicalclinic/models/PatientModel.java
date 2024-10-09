@@ -33,6 +33,9 @@ public class PatientModel {
     @OneToMany(mappedBy = "patient")
     private Set<VisitModel> visitModel;
 
+    @OneToMany(mappedBy = "patient")
+    private Set<PaymentsModel> payments;
+
     @Embedded
     private AddressModel address;
 
@@ -105,6 +108,15 @@ public class PatientModel {
 
     public PatientModel setVisitModel(Set<VisitModel> visitModel) {
         this.visitModel = visitModel;
+        return this;
+    }
+
+    public Set<PaymentsModel> getPayments() {
+        return payments;
+    }
+
+    public PatientModel setPayments(Set<PaymentsModel> payments) {
+        this.payments = payments;
         return this;
     }
 }

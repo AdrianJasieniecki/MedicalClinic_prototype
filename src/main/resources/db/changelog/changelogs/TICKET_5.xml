@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+       https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd">
+
+    <changeSet id="TICKET_5-1" author="Adrian Jasieniecki">
+        <preConditions>
+            <not>
+                <sequenceExists sequenceName="payments_seq"/>
+            </not>
+        </preConditions>
+        <createSequence sequenceName="payments_seq" incrementBy="1" startValue="1"/>
+    </changeSet>
+    <changeSet id="TICKET_5-2" author="Adrian Jasieniecki">
+        <preConditions>
+            <not>
+                <tableExists tableName="PAYMENTS"/>
+            </not>
+        </preConditions>
+        <createTable tableName="PAYMENTS">
+            <column name="payments_id" type="int">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="sum" type="decimal(19,2)"/>
+            <column name="date_of_payment" type="date"/>
+            <column name="payment_status" type="varchar(10)"/>
+            <column name="payment_method" type="varchar(14)"/>
+            <column name="patient_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="visits_id" type="int">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="TICKET_5-3" author="Adrian Jasieniecki">
+        <addForeignKeyConstraint baseTableName="PAYMENTS"
+                                 baseColumnNames="payments_id"
+                                 constraintName="fk_payment_visit"
+                                 referencedTableName="VISITS"
+                                 referencedColumnNames="visits_id"/>
+    </changeSet>
+</databaseChangeLog>

@@ -40,6 +40,9 @@ public class VisitModel {
     @OneToMany(mappedBy = "visit")
     private Set<PrescriptionModel> prescriptions;
 
+    @OneToOne(mappedBy = "visit")
+    private PaymentsModel payments;
+
     public Long getId() {
         return id;
     }
@@ -109,6 +112,15 @@ public class VisitModel {
 
     public VisitModel setPrescriptions(Set<PrescriptionModel> prescriptions) {
         this.prescriptions = prescriptions;
+        return this;
+    }
+
+    public PaymentsModel getPayments() {
+        return payments;
+    }
+
+    public VisitModel setPayments(PaymentsModel payments) {
+        this.payments = payments;
         return this;
     }
 }
