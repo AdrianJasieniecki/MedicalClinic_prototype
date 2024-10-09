@@ -11,4 +11,5 @@
     <include relativeToChangelogFile="true" file="changelogs/TICKET_4.xml"/>
     <include relativeToChangelogFile="true" file="changelogs/TICKET_5.xml"/>
     <include relativeToChangelogFile="true" file="changelogs/TICKET_6.xml"/>
+    <include relativeToChangelogFile="true" file="changelogs/TICKET_7.xml"/>
 </databaseChangeLog>
