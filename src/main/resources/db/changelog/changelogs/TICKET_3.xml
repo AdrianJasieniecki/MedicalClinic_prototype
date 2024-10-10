@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+       https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd">
+
+    <changeSet id="TICKET_3-1" author="Adrian Jasieniecki">
+        <preConditions onFail="WARN">
+            <not>
+                <sequenceExists sequenceName="visits_seq"/>
+            </not>
+        </preConditions>
+        <createSequence sequenceName="visits_seq" incrementBy="1" startValue="1"/>
+    </changeSet>
+    <changeSet id="TICKET_3-2" author="Adrian Jasieniecki">
+        <preConditions onFail="WARN">
+            <not>
+                <tableExists tableName="VISITS"/>
+            </not>
+        </preConditions>
+        <createTable tableName="VISITS">
+            <column name="visits_id" type="int">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="visit_date" type="date"/>
+            <column name="visit_time" type="time"/>
+            <column name="visit_status" type="varchar(15)"/>
+            <column name="description" type="varchar(1000)"/>
+            <column name="doctor_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="patient_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="TICKET_3-3" author="Adrian Jasieniecki">
+        <addForeignKeyConstraint baseTableName="VISITS"
+                                 baseColumnNames="visits_id"
+                                 constraintName="fk_visit_doctor"
+                                 referencedTableName="DOCTOR"
+                                 referencedColumnNames="doctor_id"/>
+    </changeSet>
+    <changeSet id="TICKET_3_4" author="Adrian Jasieniecki">
+        <addForeignKeyConstraint baseTableName="VISITS"
+                                 baseColumnNames="visits_id"
+                                 constraintName="fk_visit_patient"
+                                 referencedTableName="PATIENT"
+                                 referencedColumnNames="patient_id"/>
+    </changeSet>
+</databaseChangeLog>

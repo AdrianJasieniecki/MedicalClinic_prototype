@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+       https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd">
+
+    <changeSet id="TICKET_2-1" author="Adrian Jasieniecki">
+        <preConditions onFail="WARN">
+            <not>
+                <sequenceExists sequenceName="patient_seq"/>
+            </not>
+        </preConditions>
+        <createSequence sequenceName="patient_seq" incrementBy="1" startValue="1"/>
+    </changeSet>
+    <changeSet id="TICKET_2-2" author="Adrian Jasieniecki">
+        <preConditions onFail="WARN">
+            <not>
+                <tableExists tableName="PATIENT"/>
+            </not>
+        </preConditions>
+        <createTable tableName="PATIENT">
+            <column name="patient_id" type="int">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(25)"/>
+            <column name="surname" type="varchar(30)"/>
+            <column name="date_of_birth" type="date"/>
+            <column name="pesel" type="varchar(9)"/>
+            <column name="phone_number" type="varchar(15)"/>
+            <column name="street" type="varchar(50)"/>
+            <column name="apartment_number" type="varchar(10)"/>
+            <column name="city" type="varchar(30)"/>
+            <column name="province" type="varchar(30)"/>
+            <column name="country" type="varchar(30)"/>
+            <column name="zip_code" type="varchar(7)"/>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>
