@@ -14,6 +14,7 @@ public class PatientDTO {
     private AddressDTO address;
     private Set<VisitDTO> visitDTOS;
     private Set<PaymentsDTO> payments;
+    private Set<PrescriptionDTO> prescriptions;
 
     public Long getId() {
         return id;
@@ -93,6 +94,15 @@ public class PatientDTO {
 
     public PatientDTO setPayments(Set<PaymentsDTO> payments) {
         this.payments = payments;
+        return this;
+    }
+
+    public Set<PrescriptionDTO> getPrescriptions() {
+        return prescriptions;
+    }
+
+    public PatientDTO setPrescriptions(Set<PrescriptionDTO> prescriptions) {
+        this.prescriptions = prescriptions;
         return this;
     }
 }
